@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form2</title>
+    <link rel="stylesheet" href="form2.css">
+</head>
+<body>
+    <div class="main">
+        <p class="heading">Registration Form</p><br>
+        <form id="myForm" onsubmit="reset()">
+            <label>Full Name</label><br>
+            <input type="text" name="fname" id="fname" placeholder="Enter your Name"  required autofocus><br><br>
+            <label>Last Name</label><br>
+            <input type="text" name="lname" id="lname" placeholder="Enter Last Name"required><br><br>
+            <label>Phone No</label><br>
+            <input type="tel" id="phoneno" pattern="[0-9]{10}" placeholder="Enter the Contact NUmber" required><br><br>
+            <label for="email">Email : </label><br>
+            <input type="email" id="email" placeholder="Email" required><br><br>
+            <label for="gender">Gender :</label><br>
+            <input type="radio" id="gender" value="Male" name="gender" class="redio" required><label name="male">Male</label>
+            <input type="radio" id="gender" value="Female" name="gender"><label name="female">Female</label>
+            <input type="radio" id="gender" value="Others" name="gender"><label name="others">Others</label><br><br>
+            <label>Date of Birth :</label><br>
+            <input type="date" id="date" name="date"  required><br><br>
+            <label>Address :</label><br>
+            <textarea cols="25" rows="4" id="Address" placeholder="Enter Your Address" required></textarea><br><br>
+            <label>Select Country :</label><br>
+            <select name="country" id="country" required>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="UAE">UAE</option>
+                <option value="China">China</option>
+                <option value="England">England</option>
+                <option value="South-Africa">South-Africa</option>
+            </select><br><br>
+            <input type="submit" onclick="add()"  name="submit" class="buttons">
+            <input type="reset"  class="buttons">
+            
+         </form>
+    </div>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Full Name</th>
+            <th>Last Name</th>
+            <th>Phone No</th>
+            <th>E-mail</th>
+            <th>Gender</th>
+            <th>D.O.B</th>
+            <th>Address</th>
+            <th>Country</th>
+            <th>delete</th>
+            <th>update</th>
+        </tr>
+        <tbody id="tablebody">
+
+        </tbody>
+    
+    </table>
+    <script src="form2.js">
+    </script>
+</body>
+</html>
