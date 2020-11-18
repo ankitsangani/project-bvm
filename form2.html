@@ -25,7 +25,7 @@
             <label>Date of Birth :</label><br>
             <input type="date" id="date" name="date"  required><br><br>
             <label>Address :</label><br>
-            <textarea cols="25" rows="4" id="Address" placeholder="Enter Your Address" required></textarea><br><br>
+            <textarea cols="25" rows="4" id="address" placeholder="Enter Your Address" required></textarea><br><br>
             <label>Select Country :</label><br>
             <select name="country" id="country" required>
                 <option value="India">India</option>
@@ -35,8 +35,10 @@
                 <option value="England">England</option>
                 <option value="South-Africa">South-Africa</option>
             </select><br><br>
+            <input type="hidden" id="saveindex">
             <input type="submit" onclick="add()"  name="submit" class="buttons">
             <input type="reset"  class="buttons">
+            <input type="button" onclick="savetaskk()" id="savetask"  class="buttons" style="display: none;" value="Save">
             
          </form>
     </div>

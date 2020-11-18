@@ -1,18 +1,19 @@
 let array = [];
 let indexx;
 show();
+
 function add()
 {
-    if(localStorage.getItem('data') == null)
+    if(!localStorage.getItem('data'))
     {
         array.push({
             fname: document.getElementById('fname').value,
             lname: document.getElementById('lname').value,
             phoneno: document.getElementById('phoneno').value,
             email: document.getElementById("email").value,
-            gender: document.getElementById('gender').value,
+            gender:document.querySelector('input[id="gender"]:checked').value, 
             date: document.getElementById('date').value,
-            address: document.getElementById("Address").value,
+            address: document.getElementById("address").value,
             country: document.getElementById('country').value
 
         });
@@ -20,6 +21,8 @@ function add()
     }
     else
     {
+        if(validate())
+        {
         arraystr = localStorage.getItem('data');
         array = JSON.parse(arraystr);
         array.push({
@@ -27,69 +30,38 @@ function add()
             lname: document.getElementById('lname').value,
             phoneno: document.getElementById('phoneno').value,
             email: document.getElementById("email").value,
-            gender: document.getElementById('gender').value,
+            gender: document.querySelector('input[id="gender"]:checked').value,
             date: document.getElementById('date').value,
-            address: document.getElementById("Address").value,
+            address: document.getElementById("address").value,
             country: document.getElementById('country').value
+            
         });
         localStorage.setItem('data',JSON.stringify(array));
+    }
         document.getElementById('myForm').reset();
         show();
-    }
-    
+
+    }   
 } 
-// function show()
-// {
-//     let tablebody = document.getElementById('tablebody');
-    
-//     for(i=0;i<array.length;i++)
-//     {
-//         console.log(array.length);
-        
-//         row = tablebody.insertRow();
-//         data1 = row.insertCell();
-//         data2 = row.insertCell();
-//         data3 = row.insertCell();
-//         data4 = row.insertCell();
-//         data5 = row.insertCell();
-//         data6 = row.insertCell();
-//         data7 = row.insertCell();
-//         data8 = row.insertCell();
-        
-//         data1.innerHTML = array[i].fname;
-//         data2.innerHTML = array[i].lname;
-//         data3.innerHTML = array[i].phoneno;
-//         data4.innerHTML = array[i].email;
-//         data5.innerHTML = array[i].gender;
-//         data6.innerHTML = array[i].date;
-//         data7.innerHTML = array[i].address;
-//         data8.innerHTML = array[i].country;
-//         console.log("hello");
-//     }
-// }
-// function show()
-// {
-//     let tablebody = document.getElementById('tablebody');
-//     let str = "";
-//     var html = "<table border='1|1'>";
-//     for (var i = 0; i < array.length; i++) {
-//         html+="<tr>";
-//         html+="<td>"+array[i].fname+"</td>";
-//         html+="<td>"+array[i].lname+"</td>";
-//         html+="<td>"+array[i].phoneno+"</td>";
-//         html+="<td>"+array[i].email+"</td>";
-//         html+="<td>"+array[i].gender+"</td>";
-//         html+="<td>"+array[i].date+"</td>";
-//         html+="<td>"+array[i].address+"</td>";
-//         html+="<td>"+array[i].country+"</td>";
-//         html+="</tr>";
-//     }
-//     html+="</table>";
-//     tablebody.innerHTML = str;
-// }
+function validate()
+{
+    var firstname = document.forms['myForm']['fname'].value;
+    var lastname = document.forms['myForm']['lname'].value;
+    var phoneno = document.forms['myForm']['phoneno'].value;
+    var email = document.forms['myForm']['email'].value;
+    var address = document.forms['myForm']['address'].value;
+    var date = document.forms['myForm']['date'].value;
+    if(firstname == "" || lastname == "" || phoneno == "" || email == "" ||address == "" ||date == "")
+    {
+        alert("complete details");
+        return false;
+    }
+    return true;
+}
+
 function show()
 {
-    arraystr = localStorage.getItem('data');
+    arraystr = localStorage.getItem('data') || [];
     array = JSON.parse(arraystr);
     let tablebody = document.getElementById('tablebody');
     let str = "";
@@ -121,16 +93,39 @@ function deletee(itemIndex)
 }
 function update(itemIndex)
 {
-
+    let savetask = document.getElementById('savetask');
     arraystr = localStorage.getItem('data');
     array = JSON.parse(arraystr);
+    indexx = itemIndex;
+    document.querySelector('input[id="gender"]').checked = false;
     document.getElementById('fname').value = array[itemIndex].fname;
     document.getElementById('lname').value = array[itemIndex].lname;
     document.getElementById('phoneno').value = array[itemIndex].phoneno;
     document.getElementById("email").value =array[itemIndex].email;
-    document.getElementById('gender').value = array[itemIndex].gender;
+    document.querySelector(`input[value=${array[itemIndex].gender}]`).checked = true;
     document.getElementById('date').value = array[itemIndex].date;
-    document.getElementById("Address").value = array[itemIndex].Address;
+    document.getElementById("address").value = array[itemIndex].address;
     document.getElementById('country').value =array[itemIndex].country;
+    savetask.style.display="inline-block";
+    show();
+}
+
+function savetaskk()
+{
+    let savetask = document.getElementById('savetask');
+    arraystr = localStorage.getItem('data');
+    array = JSON.parse(arraystr);
+    array[indexx] = {
+        fname: document.getElementById('fname').value,
+        lname: document.getElementById('lname').value,
+        phoneno: document.getElementById('phoneno').value,
+        email: document.getElementById("email").value,
+        gender:  document.querySelector('input[id="gender"]:checked').value,
+        date: document.getElementById('date').value,
+        address: document.getElementById("address").value,
+        country: document.getElementById('country').value
+
+    };
+    localStorage.setItem('data',JSON.stringify(array));
     show();
 }
